@@ -1,0 +1,22 @@
+﻿@model TestTask.Service.Models.Staff
+
+@{
+    ViewData["Title"] = "Add staff";
+}
+
+<div class="text-center">
+    <h1>Add staff</h1>
+    <form method="post" asp-controller="staff" asp-action="check">
+        <p>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+        </p><p>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+        </p>
+        <input type="submit" value="Add" />
+    </form>
+
+</div>

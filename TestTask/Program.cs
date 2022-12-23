@@ -1,4 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using TestTask.DAL;
+using TestTask.DAL.Interfaces;
+using TestTask.DAL.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// get the connection string from the configuration file
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// add the ApplicationContext as a service
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
+
+builder.Services.AddScoped<IStaffRepository, StaffRepository>(); // edit
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

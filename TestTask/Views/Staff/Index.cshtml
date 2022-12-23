@@ -1,0 +1,16 @@
+﻿@model List<TestTask.Service.Models.Staff>
+
+@{
+    ViewData["Title"] = "Staff management";
+}
+
+<div class="text-center">
+    <h1>Staff management</h1>
+    <a href="/staff/create">Add new staff</a>
+    <h3>Staff list</h3>
+    @foreach (var staff in Model)
+    {
+        <p>@staff.Name</p>
+        <p>@staff.Email</p>
+    }
+</div>
