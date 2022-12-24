@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestTask.Domain.Models;
+using TestTask.Service.Response;
 
-namespace TestTask.DAL.Interfaces
+namespace TestTask.Service.Interfaces
 {
-    public interface IStaffRepository : IBaseRepository<Staff>
+    public interface IStaffService
     {
-        Task<Staff> GetByName(string name);
+        Task<IBaseResponse<IEnumerable<Staff>>> GetStaff();
     }
 }

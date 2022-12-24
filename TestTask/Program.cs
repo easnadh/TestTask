@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using TestTask.DAL;
 using TestTask.DAL.Interfaces;
 using TestTask.DAL.Repositories;
+using TestTask.Service.Implementations;
+using TestTask.Service.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,8 @@ string connection = builder.Configuration.GetConnectionString("DefaultConnection
 // add the ApplicationContext as a service
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
 
-builder.Services.AddScoped<IStaffRepository, StaffRepository>(); // edit
+builder.Services.AddScoped<IStaffRepository, StaffRepository>();
+builder.Services.AddScoped<IStaffService, StaffService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

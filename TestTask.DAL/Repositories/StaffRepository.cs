@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestTask.DAL.Interfaces;
-using TestTask.Service.Models;
+using TestTask.Domain.Models;
 
 namespace TestTask.DAL.Repositories
 {
@@ -18,35 +18,35 @@ namespace TestTask.DAL.Repositories
             db = context;
         }
 
-        public bool Create(Staff entity)
+        public async Task<bool> Create(Staff entity)
         {
-            db.Staff.Add(entity);
-            db.SaveChanges();
+            await db.Staff.AddAsync(entity);
+            await db.SaveChangesAsync();
 
             return true;
         }
 
-        public bool Delete(Staff entity)
+        public async Task<bool> Delete(Staff entity)
         {
             db.Staff.Remove(entity);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return true;
         }
 
-        public Staff Get(int id)
+        public async Task<Staff> Get(int id)
         {
-            return db.Staff.FirstOrDefault(x => x.Id == id);
+            return await db.Staff.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Staff GetByName(string name)
+        public async Task<Staff> GetByName(string name)
         {
-            return db.Staff.FirstOrDefault(x => x.Name == name);
+            return await db.Staff.FirstOrDefaultAsync(x => x.Name == name);
         }
 
-        public IEnumerable<Staff> Select()
+        public async Task<List<Staff>> Select()
         {
-            return db.Staff.ToList();
+            return await db.Staff.ToListAsync();
         }
     }
 }

@@ -1,25 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TestTask.DAL.Interfaces;
-using TestTask.Service.Models;
-using TestTask.Models;
+using TestTask.Service.Interfaces;
 
 namespace TestTask.Controllers
 {
     public class StaffController : Controller
     {
-        private readonly IStaffRepository _staffRepository;
+        private readonly IStaffService _staffService;
 
-        public StaffController(IStaffRepository staffRepository)
-        { 
-            _staffRepository = staffRepository;
+        public StaffController(IStaffService staffService)
+        {
+            _staffService = staffService;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var response = _staffRepository.Select();
-
-            return View(response);
+            var response = await _staffService.GetStaff();
+            if (response.StatusCode == Service.Response.StatusCode.Success)
+            {
+                return View(response.Data);
+            }
+            return RedirectToAction("Error");
         }
 
         public IActionResult Create()
